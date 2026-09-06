@@ -35,7 +35,7 @@ public class PartTwoTest {
     void checkCheckAccess() {
         Random random = new Random();
         int x = random.nextInt(100) + 1;
-        if (checkAccess(x) ==((x > 18) ? "Allowed" : "Denied") ) {
+        if (checkAccess(x) == ((x > 18) ? "Allowed" : "Denied")) {
             System.out.println("checkAccess - TEST PASSED");
         } else {
             System.out.println("checkAccess - TEST FAILED");
@@ -45,7 +45,8 @@ public class PartTwoTest {
     @Test
     void checkIsPositive() {
         Random random = new Random();
-        int x = random.nextInt(21) - 10;;
+        int x = random.nextInt(21) - 10;
+        ;
         if (isPositive(x) == (x >= 0)) {
             System.out.println("isPositive - TEST PASSED");
         } else {
@@ -54,8 +55,36 @@ public class PartTwoTest {
     }
 
 
+    @Test
+    void checkGetGrade() {
+        Random random = new Random();
+        int x = random.nextInt(100 + 1);
+        String score;
+        if ((x >= 0) && (x <= 20)) {
+            score = "E";
+        } else if ((x >= 21) && (x <= 40)) {
+            score = "D";
+        } else if ((x >= 41) && (x <= 60)) {
+            score = "C";
+        } else if ((x >= 61) && (x <= 80)) {
+            score = "B";
+        } else if ((x >= 81) && (x <= 100)) {
+            score = "A";
+        } else score = "Error";
+
+        if (getGrade(x) == score) {
+            System.out.println("getGrade - TEST PASSED");
+        } else {
+            System.out.println("getGrade - TEST FAILED");
+        }
+    }
 
 
 }
+
+
+
+
+
 
 
