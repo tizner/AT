@@ -81,6 +81,8 @@ public class TestClass {
         return false;
     }
 
+
+
     /*
      * Задача 8: разработать метод с сигнатурой publiс static getEvenInRange(int start, int end). Метод принимает границы диапазона и возвращает строку,
      * состоящую только из чётных чисел внутри этого промежутка (включая границы), разделённых пробелом.
@@ -93,7 +95,7 @@ public class TestClass {
                 str += " " + i;
             }
         }
-        return str;
+        return str.trim();
     }
 //Задача 9: разработать метод с сигнатурой publiс static public int findMax(int[] arr). Метод находит и возвращает самое большое число в переданном массиве.
 
@@ -131,21 +133,21 @@ public class TestClass {
 
     }
 
+
+
     /* Задача 12: разработать метод с сигнатурой publiс static List<String> removeSpecificName(List<String> list, String nameToRemove).
     Метод принимает список и имя, которое нужно исключить. Возвращает новый список, не содержащий указанного имени.  */
 
-    public static List<String>  removeSpecificName(List<String> list, String nameToRemove){
-        int index = list.indexOf(nameToRemove);
-       if (index==-1){
-           return list;
-       }
-       else {
-           list.remove(index);
-           return list;
-       }
-
-
+    public static List<String> removeSpecificName(List<String> list, String nameToRemove) {
+        List<String> result = new ArrayList<>();
+        for (String name : list) {
+            if (!name.equals(nameToRemove)) {
+                result.add(name);
+            }
+        }
+        return result;
     }
+
 
     public static void main(String[] args) {
         //System.out.println(isEven(18));
@@ -158,7 +160,7 @@ public class TestClass {
        /* String[] words = {"Привет", "Мир", "Bug"};
           System.out.println(hasBug(words));*/
 
-        // System.out.println(getEvenInRange(-1, 6));
+        //System.out.println(getEvenInRange(2, 5));
 
         //int[] arr = {0,2,-5};
         //System.out.println(findMax(arr));
@@ -170,8 +172,11 @@ public class TestClass {
         //List<Integer> list = List.of(1, 2, 3, 7);
         //System.out.println(calcAverage(list));
 
-        List<String> list = new ArrayList<>(Arrays.asList("Alex", "John", "Bill"));
-        List<String> newlist= removeSpecificName(list, "John");
-        System.out.println(newlist);
+
+        /* List<String> list = new ArrayList<>(Arrays.asList("Alex", "John", "Bill","John"));
+        System.out.println(removeSpecificName(list,"John"));
+
+         */
+
     }
 }
