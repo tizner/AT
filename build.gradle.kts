@@ -16,6 +16,7 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+    outputs.upToDateWhen { false }
 }
 
 tasks.register<Test>("TestMethod") {
