@@ -67,9 +67,8 @@ public class TestClass {
     }
 
     /*
-Задача 7: разработать метод с сигнатурой publiс static boolean hasBug(String[] messages). Метод принимает массив строк и возвращает true,
- если хотя бы одна строка в массиве равна Bug. Сравнение можно выполнять без учёта регистра.
-
+Задача 7: разработать метод с сигнатурой publiс static boolean hasBug(String[] messages). Метод принимает массив строк
+и возвращает true, если хотя бы одна строка в массиве равна Bug. Сравнение можно выполнять без учёта регистра.
      */
 
     public static boolean hasBug(String[] messages) {

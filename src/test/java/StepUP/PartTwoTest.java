@@ -1,11 +1,10 @@
 package StepUP;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
-
 import java.util.Random;
-
 import static StepUP.TestClass.*;
-import static StepUP.TestClass.isEven;
+
 
 public class PartTwoTest {
 
@@ -79,8 +78,74 @@ public class PartTwoTest {
         }
     }
 
+    @RepeatedTest(5)
+    void checkBlastOff() {
+        Random random = new Random();
+        int x = random.nextInt(10);
+        String blast = "";
+        for (int i = x; i > 0; i--) {
+            blast = blast + " " + i;
+        }
+        blast += " Поехали!";
+        blast = blast.trim();
+
+        if (blastOff(x).equals(blast)) {
+            System.out.println("checkAccess - TEST PASSED");
+        } else {
+            System.out.println("checkAccess - TEST FAILED");
+        }
+    }
+
+
+    @RepeatedTest(6)
+    void checkSumToN() {
+        Random random = new Random();
+        int x = random.nextInt(10);
+        int sum = 0;
+        for (int i = 0; i <= x; i++) {
+            sum += i;
+        }
+
+        if (sumToN(x) == sum) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
+    }
+
+
+    @RepeatedTest(7)
+    void checkHasBug() {
+        Random random = new Random();
+        boolean test = false;
+        //Генерация массива строк
+        int size = random.nextInt(5) + 1; // от 1 до 5 элементов
+        String[] messages = new String[size];
+        for (int i = 0; i < size; i++) {
+            if (random.nextBoolean()) {
+                messages[i] = "Bug";
+            } else {
+                messages[i] = "Item" + random.nextInt(100);
+            }
+        }
+
+        for (String message : messages) {
+            if (message.equalsIgnoreCase("Bug")) {
+                test = true;
+            }
+        }
+
+        if (hasBug(messages) == test) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
+    }
 
 }
+
+
+
 
 
 
