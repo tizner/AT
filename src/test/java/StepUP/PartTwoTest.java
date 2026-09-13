@@ -2,7 +2,12 @@ package StepUP;
 
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+
 import java.util.Random;
+import java.util.stream.Stream;
+
 import static StepUP.TestClass.*;
 
 
@@ -142,21 +147,67 @@ public class PartTwoTest {
         }
     }
 
-    /*
-     * Задача 8: разработать метод с сигнатурой publiс static getEvenInRange(int start, int end). Метод принимает границы диапазона и возвращает строку,
-     * состоящую только из чётных чисел внутри этого промежутка (включая границы), разделённых пробелом.
-     * Перед первым и после последнего числа пробел не ставится. Например: (2, 5) -> “2 4”
-     * */
-    public static String getEvenInRange(int start, int end) {
+
+    @RepeatedTest(8)
+    void checkGetEvenInRange() {
         String str = "";
-        for (int i = start; i <= end; i++) {
+        Random random = new Random();
+        int x1 = random.nextInt(10);
+        int x2 = random.nextInt(10);
+        int min = 0;
+        int max = 0;
+
+        if (x1 > x2) {
+            min = x2;
+            max = x1;
+        } else {
+            min = x1;
+            max = x2;
+        }
+
+        for (int i = min; i <= max; i++) {
             if (i % 2 == 0) {
                 str += " " + i;
             }
         }
-        return str.trim();
+        str = str.trim();
+        if (getEvenInRange(min, max).equals(str)) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
     }
 
+
+    static Stream<int[]> generateRandomArray() {
+        Random random = new Random();
+        return Stream.generate(() -> {
+            int length = random.nextInt(10) + 1;
+            int[] array = new int[length];
+            for (int i = 0; i < length; i++) {
+                array[i] = random.nextInt(100);
+            }
+            return array;
+        }).limit(1);
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("generateRandomArray")
+    void checkFindMax(int[] arr) {
+        int max = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (max < arr[i])
+                max = arr[i];
+        }
+
+        if (findMax(arr) == max) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
+
+    }
 
 
 }

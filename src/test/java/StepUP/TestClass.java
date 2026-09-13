@@ -96,7 +96,8 @@ public class TestClass {
         }
         return str.trim();
     }
-//Задача 9: разработать метод с сигнатурой publiс static public int findMax(int[] arr). Метод находит и возвращает самое большое число в переданном массиве.
+//Задача 9: разработать метод с сигнатурой publiс static public int findMax(int[] arr).
+// Метод находит и возвращает самое большое число в переданном массиве.
 
     public static int findMax(int[] arr) {
         int max = arr[0];

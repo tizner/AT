@@ -26,6 +26,7 @@ tasks.register<Test>("TestMethod") {
         showStandardStreams = true
     }
     outputs.upToDateWhen { false }
+
 }
 
 tasks.register("End") {
