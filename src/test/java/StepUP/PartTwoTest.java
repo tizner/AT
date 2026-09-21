@@ -3,9 +3,12 @@ package StepUP;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static StepUP.TestClass.*;
@@ -208,6 +211,107 @@ public class PartTwoTest {
         }
 
     }
+
+
+    static Stream<Arguments> provideFiveRandomLetterNames() {
+        var rng = new Random(42);
+
+        List<String> names = new ArrayList<>(List.of(
+                "Alpha", "Bravo", "Charlie", "Delta", "Echo",
+                "Foxtrot", "Golf", "Hotel", "India", "Juliet"
+        ));
+
+        Collections.shuffle(names, rng);
+
+        String[] firstFive = names.stream()
+                .limit(5)
+                .toArray(String[]::new);
+
+        return Stream.of(Arguments.of((Object) firstFive));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideFiveRandomLetterNames")
+    void checkReverse(String[] arr) {
+        String[] revers = new String[arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            revers[i] = arr[arr.length - 1 - i];
+        }
+
+        if (Arrays.equals(revers, reverse(arr))) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
+
+    }
+
+    static Stream<Arguments> generateRandomList() {
+
+        List<Integer> list = IntStream.range(0, 10)
+                .boxed()                          // превращает IntStream → Stream<Integer>
+                .collect(Collectors.toList());
+
+        return Stream.of(Arguments.of(list));
+    }
+
+    @ParameterizedTest
+    @MethodSource("generateRandomList")
+    void checkCalcAverage(List<Integer> list) {
+        int size = list.size();
+        float avg = 0;
+        float sum = 0;
+        for (Integer number : list) {
+            sum += number;
+        }
+        avg = sum / size;
+
+        if (avg == calcAverage(list)) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
+
+    }
+
+    static Stream<Arguments> provideFiveRandomLetterNamesToRemove() {
+        var rng = new Random(42);
+
+        List<String> names = new ArrayList<>(List.of(
+                "Alpha", "Bravo", "Charlie", "Delta", "Echo",
+                "Foxtrot", "Golf", "Hotel", "India", "Juliet"
+        ));
+
+        Collections.shuffle(names, rng);
+
+        // Берём первые 5 — это будет входной список для теста
+        List<String> firstFive = names.stream()
+                .limit(5)
+                .toList();
+
+        // А nameToRemove берём из полного списка names (может быть и вне firstFive)
+        String nameToRemove = names.get(rng.nextInt(names.size()));
+
+        return Stream.of(Arguments.of(firstFive, nameToRemove));
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideFiveRandomLetterNamesToRemove")
+    void checkRemoveSpecificName(List<String> list, String nameToRemove) {
+        List<String> result = new ArrayList<>();
+        for (String name : list) {
+            if (!name.equals(nameToRemove)) {
+                result.add(name);
+            }
+        }
+        if (result.equals(removeSpecificName(list,nameToRemove))) {
+            System.out.println("isPositive - TEST PASSED");
+        } else {
+            System.out.println("isPositive - TEST FAILED");
+        }
+
+    }
+
 
 
 }
