@@ -249,7 +249,7 @@ public class PartTwoTest {
     static Stream<Arguments> generateRandomList() {
 
         List<Integer> list = IntStream.range(0, 10)
-                .boxed()                          // превращает IntStream → Stream<Integer>
+                .boxed()
                 .collect(Collectors.toList());
 
         return Stream.of(Arguments.of(list));
@@ -284,12 +284,10 @@ public class PartTwoTest {
 
         Collections.shuffle(names, rng);
 
-        // Берём первые 5 — это будет входной список для теста
         List<String> firstFive = names.stream()
                 .limit(5)
                 .toList();
 
-        // А nameToRemove берём из полного списка names (может быть и вне firstFive)
         String nameToRemove = names.get(rng.nextInt(names.size()));
 
         return Stream.of(Arguments.of(firstFive, nameToRemove));
