@@ -98,9 +98,9 @@ public class PartTwoTest {
         blast = blast.trim();
 
         if (blastOff(x).equals(blast)) {
-            System.out.println("checkAccess - TEST PASSED");
+            System.out.println("blastOff - TEST PASSED");
         } else {
-            System.out.println("checkAccess - TEST FAILED");
+            System.out.println("blastOff - TEST FAILED");
         }
     }
 
@@ -115,9 +115,9 @@ public class PartTwoTest {
         }
 
         if (sumToN(x) == sum) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("sumToN - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("sumToN - TEST FAILED");
         }
     }
 
@@ -144,9 +144,9 @@ public class PartTwoTest {
         }
 
         if (hasBug(messages) == test) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("hasBug - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("hasBug - TEST FAILED");
         }
     }
 
@@ -175,9 +175,9 @@ public class PartTwoTest {
         }
         str = str.trim();
         if (getEvenInRange(min, max).equals(str)) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("getEvenInRange - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("getEvenInRange - TEST FAILED");
         }
     }
 
@@ -205,9 +205,9 @@ public class PartTwoTest {
         }
 
         if (findMax(arr) == max) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("findMax - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("findMax - TEST FAILED");
         }
 
     }
@@ -239,9 +239,9 @@ public class PartTwoTest {
         }
 
         if (Arrays.equals(revers, reverse(arr))) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("reverse - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("reverse - TEST FAILED");
         }
 
     }
@@ -267,9 +267,9 @@ public class PartTwoTest {
         avg = sum / size;
 
         if (avg == calcAverage(list)) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("calcAverage - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("calcAverage - TEST FAILED");
         }
 
     }
@@ -303,9 +303,9 @@ public class PartTwoTest {
             }
         }
         if (result.equals(removeSpecificName(list,nameToRemove))) {
-            System.out.println("isPositive - TEST PASSED");
+            System.out.println("removeSpecificName - TEST PASSED");
         } else {
-            System.out.println("isPositive - TEST FAILED");
+            System.out.println("removeSpecificName - TEST FAILED");
         }
 
     }
