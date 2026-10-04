@@ -1,6 +1,8 @@
 package StepUP;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.RepeatedTest;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -12,30 +14,29 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static StepUP.TestClass.*;
+import static StepUP.PartTwoTest.*;
+import static StepUP.TestClass.isEven;
 
-
-public class PartTwoTest {
+public class AssertionTwoTest {
 
     /*
-    * Задача 2: в проект, созданный в задаче 1, добавить тестовый класс или набор классов, содержащих запуск всех
-    * тестовых методов, разработанных в ДЗ к теме «Базовая Java», и проверку, что результат работы равен эталонному.
-    * Использование assert не требуется, достаточно проверить в условном операторе и вывести на
-    * экран строку TEST PASSED или TEST FAILED. Данные для запуска тестов должны быть сгенерированы случайно или взяты из CSV,
-    *  прикреплённого к проекту. Как минимум 4 метода должны вызываться с аннотацией:
-1. @Test
-2. @RepeatedTest
-3. @ParametrizedTest
-    * */
+    Задача 2: добавить в автотесты разработанные в задаче 2 темы «Gradle и JUnit» информативные ассерты (заменить
+    проверки через if на ассерты). При падении ассерты должны дать информацию, что ожидалось и что было получено в
+    результате падения. Дополнить задачу запуска автотестов фильтрацией, или по аннотации @Tag, или по пакету.
+     Запустить каждый тестовый метод не менее 10 раз.
+     */
 
-    @Test
+
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkIsEven() {
         Random random = new Random();
         int x = random.nextInt(100) + 1;
-        if (isEven(x) == (x % 2 == 0)) {
-            System.out.println("isEven - TEST PASSED");
-        } else {
-            System.out.println("isEven - TEST FAILED");
-        }
+        Assertions.assertThat(isEven(x))
+                .as("TEST FAILED")
+                .isEqualTo((x % 3 == 0));
+
+
     }
 
     @Test
@@ -313,13 +314,3 @@ public class PartTwoTest {
 
 
 }
-
-
-
-
-
-
-
-
-
-
