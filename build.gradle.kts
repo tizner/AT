@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.junit.platform.launcher.TagFilter.includeTags
+
 plugins {
     id("java")
 }
@@ -29,6 +31,24 @@ tasks.register<Test>("TestMethod") {
     outputs.upToDateWhen { false }
 
 }
+
+tasks.register<Test>("testAssertionTwo") {
+    group = "tests"
+    description = "Runs only tests tagged with AssertionTwo"
+
+    useJUnitPlatform {
+        includeTags("AssertionTwo")
+    }
+    testLogging {
+        showStandardStreams = true
+    }
+    outputs.upToDateWhen { false }
+}
+
+
+
+
+
 
 tasks.register("End") {
     group = "tests"

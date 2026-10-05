@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 
 import static StepUP.TestClass.*;
 import static StepUP.PartTwoTest.*;
-import static StepUP.TestClass.isEven;
+
 
 public class AssertionTwoTest {
 
@@ -33,41 +33,40 @@ public class AssertionTwoTest {
         Random random = new Random();
         int x = random.nextInt(100) + 1;
         Assertions.assertThat(isEven(x))
-                .as("TEST FAILED")
-                .isEqualTo((x % 3 == 0));
+                .as("isEven - TEST FAILED")
+                .isEqualTo((x % 2 == 0));
 
 
     }
 
-    @Test
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkCheckAccess() {
         Random random = new Random();
         int x = random.nextInt(100) + 1;
-        if (checkAccess(x).equals((x > 18) ? "Allowed" : "Denied")) {
-            System.out.println("checkAccess - TEST PASSED");
-        } else {
-            System.out.println("checkAccess - TEST FAILED");
-        }
+        Assertions.assertThat(checkAccess(x))
+                .as("checkAccess - TEST FAILED")
+                .isEqualTo((x > 18) ? "Allowed" : "Denied");
     }
 
-    @Test
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkIsPositive() {
         Random random = new Random();
         int x = random.nextInt(21) - 10;
-        ;
-        if (isPositive(x) == (x >= 0)) {
-            System.out.println("isPositive - TEST PASSED");
-        } else {
-            System.out.println("isPositive - TEST FAILED");
-        }
+        Assertions.assertThat(isPositive(x))
+                .as("isPositive - TEST FAILED")
+                .isEqualTo((x >= 0));
+
     }
 
 
-    @Test
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkGetGrade() {
         Random random = new Random();
         int x = random.nextInt(100 + 1);
-        String score;
+        String score = "";
         if ((x >= 0) && (x <= 20)) {
             score = "E";
         } else if ((x >= 21) && (x <= 40)) {
@@ -80,14 +79,14 @@ public class AssertionTwoTest {
             score = "A";
         } else score = "Error";
 
-        if (getGrade(x).equals(score)) {
-            System.out.println("getGrade - TEST PASSED");
-        } else {
-            System.out.println("getGrade - TEST FAILED");
-        }
+        Assertions.assertThat(getGrade(x))
+                .as("getGrade - TEST FAILED")
+                .isEqualTo(score);
+
     }
 
-    @RepeatedTest(5)
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkBlastOff() {
         Random random = new Random();
         int x = random.nextInt(10);
@@ -98,15 +97,15 @@ public class AssertionTwoTest {
         blast += " Поехали!";
         blast = blast.trim();
 
-        if (blastOff(x).equals(blast)) {
-            System.out.println("blastOff - TEST PASSED");
-        } else {
-            System.out.println("blastOff - TEST FAILED");
-        }
+        Assertions.assertThat(blastOff(x))
+                .as("blastOff - TEST FAILED")
+                .isEqualTo(blast);
+
     }
 
 
-    @RepeatedTest(6)
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkSumToN() {
         Random random = new Random();
         int x = random.nextInt(10);
@@ -115,20 +114,19 @@ public class AssertionTwoTest {
             sum += i;
         }
 
-        if (sumToN(x) == sum) {
-            System.out.println("sumToN - TEST PASSED");
-        } else {
-            System.out.println("sumToN - TEST FAILED");
-        }
+        Assertions.assertThat(sumToN(x))
+                .as("sumToN - TEST FAILED")
+                .isEqualTo(sum);
+
     }
 
 
-    @RepeatedTest(7)
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkHasBug() {
         Random random = new Random();
         boolean test = false;
-        //Генерация массива строк
-        int size = random.nextInt(5) + 1; // от 1 до 5 элементов
+        int size = random.nextInt(5) + 1;
         String[] messages = new String[size];
         for (int i = 0; i < size; i++) {
             if (random.nextBoolean()) {
@@ -137,22 +135,21 @@ public class AssertionTwoTest {
                 messages[i] = "Item" + random.nextInt(100);
             }
         }
-
         for (String message : messages) {
             if (message.equalsIgnoreCase("Bug")) {
                 test = true;
             }
         }
 
-        if (hasBug(messages) == test) {
-            System.out.println("hasBug - TEST PASSED");
-        } else {
-            System.out.println("hasBug - TEST FAILED");
-        }
+        Assertions.assertThat(hasBug(messages))
+                .as("hasBug - TEST FAILED")
+                .isEqualTo(test);
+
     }
 
 
-    @RepeatedTest(8)
+    @RepeatedTest(10)
+    @Tag("AssertionTwo")
     void checkGetEvenInRange() {
         String str = "";
         Random random = new Random();
@@ -160,7 +157,6 @@ public class AssertionTwoTest {
         int x2 = random.nextInt(10);
         int min = 0;
         int max = 0;
-
         if (x1 > x2) {
             min = x2;
             max = x1;
@@ -168,34 +164,34 @@ public class AssertionTwoTest {
             min = x1;
             max = x2;
         }
-
         for (int i = min; i <= max; i++) {
             if (i % 2 == 0) {
                 str += " " + i;
             }
         }
         str = str.trim();
-        if (getEvenInRange(min, max).equals(str)) {
-            System.out.println("getEvenInRange - TEST PASSED");
-        } else {
-            System.out.println("getEvenInRange - TEST FAILED");
+
+        Assertions.assertThat(getEvenInRange(min, max))
+                .as("getEvenInRange - TEST FAILED")
+                .isEqualTo(str);
+
+    }
+
+
+        static Stream<int[]> generateRandomArray() {
+            Random random = new Random();
+            return Stream.generate(() -> {
+                int length = random.nextInt(10) + 1;
+                int[] array = new int[length];
+                for (int i = 0; i < length; i++) {
+                    array[i] = random.nextInt(100);
+                }
+                return array;
+            }).limit(10);
         }
-    }
 
 
-    static Stream<int[]> generateRandomArray() {
-        Random random = new Random();
-        return Stream.generate(() -> {
-            int length = random.nextInt(10) + 1;
-            int[] array = new int[length];
-            for (int i = 0; i < length; i++) {
-                array[i] = random.nextInt(100);
-            }
-            return array;
-        }).limit(1);
-    }
-
-
+    @Tag("AssertionTwo")
     @ParameterizedTest
     @MethodSource("generateRandomArray")
     void checkFindMax(int[] arr) {
@@ -205,32 +201,32 @@ public class AssertionTwoTest {
                 max = arr[i];
         }
 
-        if (findMax(arr) == max) {
-            System.out.println("findMax - TEST PASSED");
-        } else {
-            System.out.println("findMax - TEST FAILED");
-        }
+        Assertions.assertThat(findMax(arr))
+                .as("findMax - TEST FAILED")
+                .isEqualTo(max);
 
     }
 
 
     static Stream<Arguments> provideFiveRandomLetterNames() {
-        var rng = new Random(42);
-
-        List<String> names = new ArrayList<>(List.of(
+        var rng = new Random(42); // фиксированный seed для воспроизводимости
+        List<String> baseNames = List.of(
                 "Alpha", "Bravo", "Charlie", "Delta", "Echo",
                 "Foxtrot", "Golf", "Hotel", "India", "Juliet"
-        ));
+        );
 
-        Collections.shuffle(names, rng);
-
-        String[] firstFive = names.stream()
-                .limit(5)
-                .toArray(String[]::new);
-
-        return Stream.of(Arguments.of((Object) firstFive));
+        return Stream.generate(() -> {
+                    var shuffled = new ArrayList<>(baseNames);
+                    Collections.shuffle(shuffled, rng);
+                    return shuffled.stream()
+                            .limit(5)
+                            .toArray(String[]::new);
+                })
+                .limit(10)
+                .map(arr -> Arguments.of((Object) arr));
     }
 
+    @Tag("AssertionTwo")
     @ParameterizedTest
     @MethodSource("provideFiveRandomLetterNames")
     void checkReverse(String[] arr) {
@@ -239,23 +235,29 @@ public class AssertionTwoTest {
             revers[i] = arr[arr.length - 1 - i];
         }
 
-        if (Arrays.equals(revers, reverse(arr))) {
-            System.out.println("reverse - TEST PASSED");
-        } else {
-            System.out.println("reverse - TEST FAILED");
-        }
+        Assertions.assertThat(reverse(arr))
+                .as("reverse - TEST FAILED")
+                .isEqualTo(revers);
 
     }
 
     static Stream<Arguments> generateRandomList() {
-
-        List<Integer> list = IntStream.range(0, 10)
+        var rng = new Random(42);
+        List<Integer> baseList = IntStream.range(0, 10)
                 .boxed()
                 .collect(Collectors.toList());
 
-        return Stream.of(Arguments.of(list));
+        return Stream.generate(() -> {
+                    var shuffled = new ArrayList<>(baseList);
+                    Collections.shuffle(shuffled, rng);
+                    return shuffled;
+                })
+                .limit(10)
+                .map(list -> Arguments.of(list));
     }
 
+
+    @Tag("AssertionTwo")
     @ParameterizedTest
     @MethodSource("generateRandomList")
     void checkCalcAverage(List<Integer> list) {
@@ -267,33 +269,38 @@ public class AssertionTwoTest {
         }
         avg = sum / size;
 
-        if (avg == calcAverage(list)) {
-            System.out.println("calcAverage - TEST PASSED");
-        } else {
-            System.out.println("calcAverage - TEST FAILED");
-        }
+        Assertions.assertThat(calcAverage(list))
+                .as("calcAverage - TEST FAILED")
+                .isEqualTo(avg);
 
     }
+
+
 
     static Stream<Arguments> provideFiveRandomLetterNamesToRemove() {
-        var rng = new Random(42);
-
-        List<String> names = new ArrayList<>(List.of(
+        var rng = new Random(42); // фиксированный seed для воспроизводимости
+        List<String> baseNames = List.of(
                 "Alpha", "Bravo", "Charlie", "Delta", "Echo",
                 "Foxtrot", "Golf", "Hotel", "India", "Juliet"
-        ));
+        );
 
-        Collections.shuffle(names, rng);
+        return Stream.generate(() -> {
+                    var shuffled = new ArrayList<>(baseNames);
+                    Collections.shuffle(shuffled, rng);
 
-        List<String> firstFive = names.stream()
-                .limit(5)
-                .toList();
+                    List<String> firstFive = shuffled.stream()
+                            .limit(5)
+                            .toList();
 
-        String nameToRemove = names.get(rng.nextInt(names.size()));
+                    // имя для удаления берём из полного перемешанного списка
+                    String nameToRemove = shuffled.get(rng.nextInt(shuffled.size()));
 
-        return Stream.of(Arguments.of(firstFive, nameToRemove));
+                    return Arguments.of(firstFive, nameToRemove);
+                })
+                .limit(10)
+                .map(args -> args);
     }
-
+    @Tag("AssertionTwo")
     @ParameterizedTest
     @MethodSource("provideFiveRandomLetterNamesToRemove")
     void checkRemoveSpecificName(List<String> list, String nameToRemove) {
@@ -303,14 +310,11 @@ public class AssertionTwoTest {
                 result.add(name);
             }
         }
-        if (result.equals(removeSpecificName(list,nameToRemove))) {
-            System.out.println("removeSpecificName - TEST PASSED");
-        } else {
-            System.out.println("removeSpecificName - TEST FAILED");
-        }
+
+        Assertions.assertThat(removeSpecificName(list, nameToRemove))
+                .as("removeSpecificName  - TEST FAILED")
+                .isEqualTo(result);
 
     }
-
-
 
 }
